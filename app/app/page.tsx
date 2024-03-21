@@ -1,128 +1,60 @@
-"use client";
+'use client';
 
-import { RoomModel } from "@/component/MeshComponent";
-import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
-import { useState } from "react";
+import RoomModel from '@/components/Model/RoomModel';
+
+import { useState } from 'react';
+import { AppMobileProvider } from '@/Contexts/AppExampleContext';
+import LgControllCard from '../../components/App/LgLightControllCard';
+import SmControllCard from '../../components/App/SmControllCard';
+import { useAppExampleContext } from '@/Contexts/AppExampleContext';
 
 function App() {
-  const [isVisible, setVisible] = useState(false);
+  const { state, dispatch } = useAppExampleContext();
+  const [devices, setdevices] = useState([{ id: 'light1' }, { id: 'light2' }]);
+  const [lgCardShowing, setlgCardShowing] = useState('');
 
+  const setVisible = (id: string) => {
+    if (lgCardShowing !== '') {
+      setlgCardShowing('');
+    } else {
+      setlgCardShowing(id);
+    }
+  };
   return (
-    <div className="w-full">
-      <RoomModel />
+    <AppMobileProvider>
+      <div className='w-full'>
+        <RoomModel />
 
-      {
-        !isVisible&& (
-          <div className="px-20 flex flex-row justify-center">
-        <motion.div
-          className=" w-[240px] h-[240px] bg-[#edeae4] rounded-2xl p-4 mr-4"
-          style={{
-            boxShadow:
-              "3.308px 3.308px 4.686px 0px #A1998D, -3.308px -3.308px 4.686px 0px #FFF",
-          }}
-          onTap={() => setVisible(!isVisible)}
-        >
-          <Image
-            src={"/imgs/air_purifier.png"}
-            alt={""}
-            width={48}
-            height={48}
-          />
-          <p>Air Purifier</p>
-          <p>Outdoor AQI: 200, gas detected</p>
-          <div className="mt-8">
-            <Image
-              src={"/imgs/switchdevice.png"}
-              alt={""}
-              width={100}
-              height={44}
-            />
+        {lgCardShowing === '' && (
+          <div className='mt-10 flex flex-row justify-center px-20'>
+            {devices.map((device) => {
+              return (
+                <SmControllCard
+                  isVisible={lgCardShowing === device.id}
+                  setVisible={() => {
+                    setVisible(device.id);
+                  }}
+                  key={device.id}
+                />
+              );
+            })}
           </div>
-        </motion.div>
-        <div
-          className=" w-[240px] h-[240px] bg-[#edeae4] rounded-2xl p-4 mr-4"
-          style={{
-            boxShadow:
-              "3.308px 3.308px 4.686px 0px #A1998D, -3.308px -3.308px 4.686px 0px #FFF",
-          }}
-        >
-          <Image
-            src={"/imgs/air_purifier.png"}
-            alt={""}
-            width={48}
-            height={48}
-          />
-          <p>Air Purifier</p>
-          <p>Outdoor AQI: 200, gas detected</p>
-          <div className="mt-8">
-            <Image
-              src={"/imgs/switchdevice.png"}
-              alt={""}
-              width={100}
-              height={44}
-            />
-          </div>
-        </div>
-        <div
-          className=" w-[240px] h-[240px] bg-[#edeae4] rounded-2xl p-4 mr-4"
-          style={{
-            boxShadow:
-              "3.308px 3.308px 4.686px 0px #A1998D, -3.308px -3.308px 4.686px 0px #FFF",
-          }}
-        >
-          <Image
-            src={"/imgs/air_purifier.png"}
-            alt={""}
-            width={48}
-            height={48}
-          />
-          <p>Air Purifier</p>
-          <p>Outdoor AQI: 200, gas detected</p>
-          <div className="mt-8">
-            <Image
-              src={"/imgs/switchdevice.png"}
-              alt={""}
-              width={100}
-              height={44}
-            />
-          </div>
+        )}
+
+        <div className=' mt-10 flex flex-row justify-center px-20'>
+          {devices.map((device) => {
+            return (
+              <LgControllCard
+                isVisible={lgCardShowing === device.id}
+                setVisible={setVisible}
+                key={device.id}
+                device={device}
+              />
+            );
+          })}
         </div>
       </div>
-        )
-      }
-      
-      <div className=" px-20 flex flex-row justify-center">
-        <AnimatePresence>
-          {isVisible && (
-            <motion.div
-            initial={{ opacity: 0, scale: 0.75 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-            onTap={() => setVisible(!isVisible)}
-              className="rounded-2xl bg-[#61605F] p-2"
-              style={{
-                filter:
-                  "drop-shadow(3px 3px 4px #A1998D) drop-shadow(-3px -3px 4px #FFF)",
-              }}
-            >
-              <motion.div
-                
-                className="w-[680px] h-[390px] rounded-2xl"
-                style={{
-                  boxShadow:
-                    "3px 3px 4px 0px #494846 inset, -3px -3px 4px 0px rgba(161, 153, 141, 0.40) inset",
-                }}
-              >
-                <div>
-                  
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
+    </AppMobileProvider>
   );
 }
 
