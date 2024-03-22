@@ -4,7 +4,7 @@ import useLight from '@/Hooks/useLight';
 import Image from 'next/image';
 import { range } from 'lodash';
 import { RadialProgressBar } from '../DragRadialProgressBar';
-import HalfCircleRing from '../Ring';
+import SemiCircleProgressBar from '../Ring';
 
 function LgControllCard({ isVisible, setVisible, device }: any) {
   const [controlValue, setcontrolValue] = useState(0);
@@ -65,7 +65,12 @@ function LgControllCard({ isVisible, setVisible, device }: any) {
             </div>{' '}
             <div className='mt-4 flex h-[65%] w-full justify-center '>
               <div className='flex h-[230px] w-[230px] flex-row justify-center'>
-                <RadialProgressBar initialAngle={1} />
+                <RadialProgressBar
+                  initialAngle={0.1}
+                  onChange={(value: number) => {
+                    setcontrolValue(value);
+                  }}
+                />
                 {/* <HalfCircleRing
                   width={400}
                   height={200}

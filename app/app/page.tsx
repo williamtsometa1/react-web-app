@@ -22,7 +22,7 @@ function App() {
   };
   return (
     <AppMobileProvider>
-      <div className='w-full'>
+      <div className='h-[100vh] w-full bg-[#EDEAE4]'>
         <RoomModel />
 
         {lgCardShowing === '' && (

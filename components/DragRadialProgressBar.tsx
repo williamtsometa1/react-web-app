@@ -1,10 +1,15 @@
 import { useDraggable } from '@/Hooks/useDraggable';
 import * as React from 'react';
+import { useEffect } from 'react';
 
-export const RadialProgressBar = ({ initialAngle }: any) => {
+export const RadialProgressBar = ({ initialAngle, onChange }: any) => {
   const [draggbleRef, dx, dy, angle] = useDraggable({
     initialAngle,
   });
+
+  useEffect(() => {
+    onChange(Math.round(angle * 100));
+  }, [angle]);
 
   return (
     <div className='relative'>

@@ -20,7 +20,7 @@
 }
 .radial-progress-bar__half--1 {
   background: #edeae4;
-  transform: rotate(325deg);
+  transform: rotate(0deg);
 }
 
 .radial-progress-bar__overlay {
