@@ -3,8 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import useLight from '@/Hooks/useLight';
 import Image from 'next/image';
 import { range } from 'lodash';
-import { RadialProgressBar } from '../DragRadialProgressBar';
-import SemiCircleProgressBar from '../Ring';
+import ArkControllProgress from '../ArkControllProgress';
 
 function LgControllCard({ isVisible, setVisible, device }: any) {
   const [controlValue, setcontrolValue] = useState(0);
@@ -63,25 +62,22 @@ function LgControllCard({ isVisible, setVisible, device }: any) {
                 />
               )}
             </div>{' '}
-            <div className='mt-4 flex h-[65%] w-full justify-center '>
-              <div className='flex h-[230px] w-[230px] flex-row justify-center'>
-                <RadialProgressBar
-                  initialAngle={0.1}
-                  onChange={(value: number) => {
-                    setcontrolValue(value);
-                  }}
+            <div className=' flex h-[65%] w-full justify-center '>
+              <div className='flex h-[230px] w-[230px] flex-col justify-center'>
+                <ArkControllProgress
+                  radius={100}
+                  lineWidth={7}
+                  color='#A1998D'
+                  insideColor='#EDEAE4'
+                  dotColor='#FD8900'
+                  dotWidth={12}
+                  percentageOrg={controlValue}
+                  setPrecentage={setcontrolValue}
                 />
-                {/* <HalfCircleRing
-                  width={400}
-                  height={200}
-                  radius={80}
-                  ringWidth={20}
-                  roundedEndRadius={10}
-                /> */}
-                {/* <div className='flex flex-col items-center justify-center bg-blue-400'>
-                  <span>65%</span>
+                <div className='-mt-[150px] flex select-none flex-col items-center justify-center text-[#fff]'>
+                  <span>{controlValue}%</span>
                   <span>Brightness</span>
-                </div> */}
+                </div>
               </div>
             </div>
             <div className='mt-4 flex justify-center'>
