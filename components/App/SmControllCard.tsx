@@ -3,7 +3,7 @@ import Image from 'next/image';
 import useLight from '@/Hooks/useLight';
 import { useAppExampleContext } from '@/Contexts/AppExampleContext';
 
-function SmControllCard({ isVisible, setVisible, id,device }: any) {
+function SmControllCard({ isVisible, setVisible, id, device }: any) {
   const { switchLight } = useLight();
   const { state, dispatch } = useAppExampleContext();
   return (

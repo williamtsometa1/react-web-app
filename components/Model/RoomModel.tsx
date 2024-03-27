@@ -37,7 +37,7 @@ export default function RoomModel() {
       <Canvas className='w-full' camera={{ position: [0, 20, 18] }}>
         <OrbitControls />
         <directionalLight color='white' position={[200, 400, 5]} />
-        <ambientLight intensity={0.8} color='#EDEAE4' />
+        <ambientLight intensity={1} color='#fff' />
         <BaseModel />
         <Light id='light1' position={[5, 12, 6]} />
       </Canvas>
