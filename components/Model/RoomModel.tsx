@@ -26,29 +26,20 @@ export default function RoomModel() {
     });
 
     return (
-      <mesh ref={mesh}>
+      <mesh ref={mesh} position={[0, 10, 0]}>
         <primitive object={gltf.scene} />
       </mesh>
     );
   }
 
   return (
-    <div className='w-full' style={{ height: '800px' }}>
-      <Canvas className='w-full' camera={{ position: [0, 10, 10] }}>
-        {/* <Environment preset='modelviewer' background /> */}
+    <div className='w-full' style={{ height: '100vh' }}>
+      <Canvas className='w-full' camera={{ position: [0, 20, 18] }}>
         <OrbitControls />
         <directionalLight color='white' position={[200, 400, 5]} />
-        <ambientLight intensity={0.5} color='#EDEAE4' />
-        {/* Increased intensity */}
-        <pointLight
-          color='#EDEAE4'
-          position={[-1.5, 0.7, 2.9]}
-          intensity={
-            state.light['light1'].status ? state.light['light1'].intensity : 0
-          }
-        />
+        <ambientLight intensity={0.8} color='#EDEAE4' />
         <BaseModel />
-        <Light id='light1' />
+        <Light id='light1' position={[5, 12, 6]} />
       </Canvas>
     </div>
   );

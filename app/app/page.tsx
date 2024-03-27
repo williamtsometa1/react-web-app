@@ -10,7 +10,10 @@ import { useAppExampleContext } from '@/Contexts/AppExampleContext';
 
 function App() {
   const { state, dispatch } = useAppExampleContext();
-  const [devices, setdevices] = useState([{ id: 'light1' }, { id: 'light2' }]);
+  const [devices, setdevices] = useState([
+    { id: 'light1', name: 'Light', roomName: 'Room' },
+    // { id: 'light2', name: 'Light 2', roomName: 'Room 2' },
+  ]);
   const [lgCardShowing, setlgCardShowing] = useState('');
 
   const setVisible = (id: string) => {
@@ -22,36 +25,39 @@ function App() {
   };
   return (
     <AppMobileProvider>
-      <div className='h-[100vh] w-full bg-[#EDEAE4]'>
+      <div className='h-[100vh] w-full overflow-hidden bg-[#EDEAE4]'>
         <RoomModel />
+        <div className='relative -top-[500px] w-full select-none'>
+          {lgCardShowing === '' && (
+            <div className='flex flex-row justify-center px-20'>
+              {devices.map((device) => {
+                return (
+                  <SmControllCard
+                    isVisible={lgCardShowing === device.id}
+                    setVisible={() => {
+                      setVisible(device.id);
+                    }}
+                    key={device.id}
+                    id={device.id}
+                    device={device}
+                  />
+                );
+              })}
+            </div>
+          )}
 
-        {lgCardShowing === '' && (
-          <div className='mt-10 flex flex-row justify-center px-20'>
+          <div className=' -mt-[50px] flex flex-row justify-center px-4'>
             {devices.map((device) => {
               return (
-                <SmControllCard
+                <LgControllCard
                   isVisible={lgCardShowing === device.id}
-                  setVisible={() => {
-                    setVisible(device.id);
-                  }}
+                  setVisible={setVisible}
                   key={device.id}
+                  device={device}
                 />
               );
             })}
           </div>
-        )}
-
-        <div className=' mt-10 flex flex-row justify-center px-20'>
-          {devices.map((device) => {
-            return (
-              <LgControllCard
-                isVisible={lgCardShowing === device.id}
-                setVisible={setVisible}
-                key={device.id}
-                device={device}
-              />
-            );
-          })}
         </div>
       </div>
     </AppMobileProvider>

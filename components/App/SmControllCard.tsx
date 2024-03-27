@@ -1,25 +1,43 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import useLight from '@/Hooks/useLight';
+import { useAppExampleContext } from '@/Contexts/AppExampleContext';
 
-function SmControllCard({ isVisible, setVisible }: any) {
+function SmControllCard({ isVisible, setVisible, id,device }: any) {
+  const { switchLight } = useLight();
+  const { state, dispatch } = useAppExampleContext();
   return (
     <motion.div
-      className=' mr-4 h-[240px] w-[240px] rounded-2xl bg-[#edeae4] p-4'
+      className=' mr-4 h-[240px] w-[240px] rounded-2xl bg-[#edeae4] px-4 py-8'
       style={{
         boxShadow:
           '3.308px 3.308px 4.686px 0px #A1998D, -3.308px -3.308px 4.686px 0px #FFF',
       }}
-      onTap={() => setVisible()}
+      onClick={() => setVisible()}
     >
-      <Image src={'/imgs/air_purifier.png'} alt={''} width={48} height={48} />
-      <p>Air Purifier</p>
-      <p>Outdoor AQI: 200, gas detected</p>
+      <Image
+        src={'/imgs/light_dark.png'}
+        alt={''}
+        width={42}
+        height={42}
+        className='mb-4'
+      />
+      <p>{device.name}</p>
+      <p>{device.roomName}</p>
       <div className='mt-8'>
         <Image
-          src={'/imgs/switchdevice.png'}
+          src={
+            state.light[id].status
+              ? '/imgs/switchdevice.png'
+              : '/imgs/switchdeviceoff.png'
+          }
           alt={''}
-          width={100}
-          height={44}
+          width={80}
+          height={32}
+          onClick={(e) => {
+            e.stopPropagation();
+            switchLight(id);
+          }}
         />
       </div>
     </motion.div>
