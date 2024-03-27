@@ -8,7 +8,7 @@ function SmControllCard({ isVisible, setVisible, id, device }: any) {
   const { state, dispatch } = useAppExampleContext();
   return (
     <motion.div
-      className=' mr-4 h-[240px] w-[240px] rounded-2xl bg-[#edeae4] px-4 py-8'
+      className='mr-4 h-[220px] w-[220px] rounded-2xl bg-[#edeae4] px-6 py-8'
       style={{
         boxShadow:
           '3.308px 3.308px 4.686px 0px #A1998D, -3.308px -3.308px 4.686px 0px #FFF',
@@ -24,7 +24,7 @@ function SmControllCard({ isVisible, setVisible, id, device }: any) {
       />
       <p>{device.name}</p>
       <p>{device.roomName}</p>
-      <div className='mt-8'>
+      <div className='mt-5'>
         <Image
           src={
             state.light[id].status

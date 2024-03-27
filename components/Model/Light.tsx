@@ -8,7 +8,7 @@ import { useAppExampleContext } from '@/Contexts/AppExampleContext';
 function Light({ id, position }: { id: string; position?: any }) {
   const { switchLight } = useLight();
 
-  const texture = useLoader(TextureLoader, '/imgs/point_air_purifier.png'); // Load the PNG texture
+  const texture = useLoader(TextureLoader, '/imgs/lightings_device@3x.png'); // Load the PNG texture
 
   const { state, dispatch } = useAppExampleContext();
 

@@ -26,7 +26,7 @@ export default function RoomModel() {
     });
 
     return (
-      <mesh ref={mesh} position={[0, 10, 0]}>
+      <mesh ref={mesh} position={[0, 8, 0]}>
         <primitive object={gltf.scene} />
       </mesh>
     );
@@ -34,7 +34,7 @@ export default function RoomModel() {
 
   return (
     <div className='w-full' style={{ height: '100vh' }}>
-      <Canvas className='w-full' camera={{ position: [0, 20, 18] }}>
+      <Canvas className='w-full' camera={{ position: [0, 22, 22] }}>
         <OrbitControls />
         <directionalLight color='white' position={[200, 400, 5]} />
         <ambientLight intensity={1} color='#fff' />

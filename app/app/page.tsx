@@ -11,7 +11,7 @@ import { useAppExampleContext } from '@/Contexts/AppExampleContext';
 function App() {
   const { state, dispatch } = useAppExampleContext();
   const [devices, setdevices] = useState([
-    { id: 'light1', name: 'Light', roomName: 'Room' },
+    { id: 'light1', name: '灯（点击展示控制面板）', roomName: '书房' },
     // { id: 'light2', name: 'Light 2', roomName: 'Room 2' },
   ]);
   const [lgCardShowing, setlgCardShowing] = useState('');
@@ -27,7 +27,7 @@ function App() {
     <AppMobileProvider>
       <div className='h-[100vh] w-full overflow-hidden bg-[#EDEAE4]'>
         <RoomModel />
-        <div className='relative -top-[500px] w-full select-none'>
+        <div className='relative -top-[300px] w-full select-none'>
           {lgCardShowing === '' && (
             <div className='flex flex-row justify-center px-20'>
               {devices.map((device) => {
@@ -46,7 +46,7 @@ function App() {
             </div>
           )}
 
-          <div className=' -mt-[50px] flex flex-row justify-center px-4'>
+          <div className=' -mt-[100px] flex flex-row justify-center px-4'>
             {devices.map((device) => {
               return (
                 <LgControllCard
